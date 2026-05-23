@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahari — Dubai Ultra-Prime Real Estate</title>
+  <meta name="description" content="Private acquisition. Discreet representation. Dubai's absolute prime." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Jost:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ LOADER ═══════════════════════════════════════ -->
+  <div id="loader">
+    <div class="loader-brand">MAHARI</div>
+    <div class="loader-bar-wrap">
+      <div id="loader-bar"></div>
+    </div>
+    <div id="loader-percent">0%</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
+  <header class="site-header">
+    <a class="site-logo" href="#">MAHARI</a>
+    <nav class="site-nav">
+      <a href="#properties">Properties</a>
+      <a href="#approach">Approach</a>
+      <a href="#markets">Markets</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Private Briefing</a>
+  </header>
+
+  <!-- ═══════════════════════════════════════ CANVAS (visible from page load) ═══════════════════════════════════════ -->
+  <div class="canvas-wrap" id="canvas-wrap">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <!-- ═══════════════════════════════════════ HERO OVERLAY (on top of canvas, fades on scroll) ═══════════════════════════════════════ -->
+  <div id="hero-overlay">
+    <div class="hero-vignette"></div>
+    <div class="hero-inner">
+      <span class="hero-label">Est. 2007 — Palm Jumeirah, Dubai</span>
+      <h1 class="hero-heading">
+        <span class="hero-word">MAHARI</span>
+        <span class="hero-word hero-word--italic">REAL ESTATE</span>
+      </h1>
+      <p class="hero-tagline">Private acquisition. Discreet representation.<br>Dubai's absolute prime.</p>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ MARQUEE (fixed, appears mid-scroll) ═══════════════════════════════════════ -->
+  <div class="marquee-wrap" id="marquee-locations" data-scroll-speed="-22">
+    <div class="marquee-text">
+      PALM JUMEIRAH &nbsp;·&nbsp; EMIRATES HILLS &nbsp;·&nbsp; JUMEIRAH BAY &nbsp;·&nbsp; DIFC &nbsp;·&nbsp; DOWNTOWN DUBAI &nbsp;·&nbsp; DUBAI HILLS &nbsp;·&nbsp;
+      PALM JUMEIRAH &nbsp;·&nbsp; EMIRATES HILLS &nbsp;·&nbsp; JUMEIRAH BAY &nbsp;·&nbsp; DIFC &nbsp;·&nbsp; DOWNTOWN DUBAI &nbsp;·&nbsp; DUBAI HILLS &nbsp;·&nbsp;
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ SCROLL CONTAINER ═══════════════════════════════════════ -->
+  <div id="scroll-container">
+
+    <!-- 001 / Philosophy -->
+    <section class="scroll-section section-content align-left">
+      <div class="section-inner">
+        <span class="section-label">001 &nbsp;/&nbsp; Philosophy</span>
+        <h2 class="section-heading">Where the world's capital chooses to arrive.</h2>
+        <p class="section-body">Dubai does not reward the cautious. The properties that define this market — Palm Jumeirah compounds, Emirates Hills estates, Jumeirah Bay island villas — are acquired before they exist as listings. Mahari operates at the point where capital meets access.</p>
+      </div>
+    </section>
+
+    <!-- 002 / Process -->
+    <section class="scroll-section section-content align-right">
+      <div class="section-inner">
+        <span class="section-label">002 &nbsp;/&nbsp; Process</span>
+        <h2 class="section-heading">Off&#8209;market.<br>Every time.</h2>
+        <p class="section-body">Ninety percent of our transactions never appear on a portal. We maintain principal-level relationships with the families, developers, and sovereign entities who hold Dubai's most significant real estate. When you retain Mahari, you are not searching a database. You are accessing a network.</p>
+      </div>
+    </section>
+
+    <!-- 003 / Locations -->
+    <section class="scroll-section section-content align-left" id="markets">
+      <div class="section-inner">
+        <span class="section-label">003 &nbsp;/&nbsp; Locations</span>
+        <h2 class="section-heading">The addresses that matter.</h2>
+        <p class="section-body">Palm Jumeirah outer fronds. Emirates Hills lakefront positions. Jumeirah Bay Island. DIFC penthouses. Dubai Hills signature plots. Each address is a different thesis on what luxury means in this market.</p>
+        <div class="location-list">
+          <span>Palm Jumeirah</span>
+          <span>Emirates Hills</span>
+          <span>Jumeirah Bay</span>
+          <span>DIFC</span>
+          <span>Dubai Hills</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 005 / Approach -->
+    <section class="scroll-section section-content align-right" id="approach">
+      <div class="section-inner">
+        <span class="section-label">005 &nbsp;/&nbsp; Approach</span>
+        <h2 class="section-heading">We represent buyers.<br>Not everyone.</h2>
+        <p class="section-body">Mahari does not list properties for commission. We represent a select group of acquiring principals each year. Our interest is total alignment with yours: the right asset, the right structure, the right price — at a market where record transactions are set, not matched.</p>
+      </div>
+    </section>
+
+  </div><!-- /scroll-container -->
+
+  <!-- ═══════════════════════════════════════ POOL FLY-OVER VIDEO ═══════════════════════════════════════ -->
+  <div id="pool-video-section">
+    <video id="pool-video" src="images/Pool Flyover.mp4" muted playsinline preload="auto"></video>
+  </div>
+
+  <!-- ═══════════════════════════════════════ POST-SCROLL CONTENT ═══════════════════════════════════════ -->
+  <div class="post-scroll-wrap">
+
+  <!-- Stats Bar -->
+  <section class="stats-static">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-row">
+          <span class="stat-number" data-decimals="1">9.2</span>
+          <span class="stat-suffix">B AED</span>
+        </div>
+        <span class="stat-label">Total transaction volume</span>
+      </div>
+      <div class="stat">
+        <div class="stat-row">
+          <span class="stat-number" data-decimals="0">147</span>
+          <span class="stat-suffix">+</span>
+        </div>
+        <span class="stat-label">Off-market mandates placed</span>
+      </div>
+      <div class="stat">
+        <div class="stat-row">
+          <span class="stat-number" data-decimals="0">17</span>
+          <span class="stat-suffix">yrs</span>
+        </div>
+        <span class="stat-label">In the Dubai prime market</span>
+      </div>
+      <div class="stat">
+        <div class="stat-row">
+          <span class="stat-number" data-decimals="1">3.4</span>
+          <span class="stat-suffix">×</span>
+        </div>
+        <span class="stat-label">Avg. vs. RERA benchmark</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Properties Grid -->
+  <section class="properties-section" id="properties">
+    <div class="properties-header">
+      <span class="section-label-static">Current Mandates</span>
+      <h2 class="properties-title">Selected Residences</h2>
+    </div>
+    <div class="properties-grid">
+
+      <article class="property-card reveal-item">
+        <div class="property-img-wrap">
+          <img class="prop-img prop-img--alt" src="images/Palm Villa.jpg" alt="Palm Jumeirah Signature Villa — Blue Hour" loading="lazy" />
+          <img class="prop-img prop-img--main" src="images/Palm Villa Golden Hour.jpg" alt="Palm Jumeirah Signature Villa — Golden Hour" loading="lazy" />
+          <div class="property-status">Off-Market</div>
+        </div>
+        <div class="property-info">
+          <div class="property-meta">
+            <span class="property-location">Palm Jumeirah, Frond M</span>
+            <span class="property-type">Signature Villa</span>
+          </div>
+          <h3 class="property-name">The Frond Residence</h3>
+          <div class="property-footer">
+            <span class="property-price">AED 85,000,000</span>
+            <span class="property-detail">7 BR &nbsp;·&nbsp; 18,400 sq ft &nbsp;·&nbsp; Private Beach</span>
+          </div>
+          <a class="property-enquire" href="#contact">Request Information</a>
+        </div>
+      </article>
+
+      <article class="property-card reveal-item">
+        <div class="property-img-wrap">
+          <img class="prop-img prop-img--alt" src="images/Emirates Hill blue hour.jpeg" alt="Emirates Hills Lakefront Estate — Blue Hour" loading="lazy" />
+          <img class="prop-img prop-img--main" src="images/Emirates Hills golden hour.jpeg" alt="Emirates Hills Lakefront Estate — Golden Hour" loading="lazy" />
+          <div class="property-status">By Introduction</div>
+        </div>
+        <div class="property-info">
+          <div class="property-meta">
+            <span class="property-location">Emirates Hills, Sector E</span>
+            <span class="property-type">Lakefront Estate</span>
+          </div>
+          <h3 class="property-name">The Hill Estate</h3>
+          <div class="property-footer">
+            <span class="property-price">AED 120,000,000</span>
+            <span class="property-detail">9 BR &nbsp;·&nbsp; 24,000 sq ft &nbsp;·&nbsp; Lake Frontage</span>
+          </div>
+          <a class="property-enquire" href="#contact">Request Information</a>
+        </div>
+      </article>
+
+      <article class="property-card reveal-item">
+        <div class="property-img-wrap">
+          <img class="prop-img prop-img--alt" src="images/Emirates Bay blue hour.jpeg" alt="Jumeirah Bay Island Villa — Blue Hour" loading="lazy" />
+          <img class="prop-img prop-img--main" src="images/Jumeirah bay golden hour.jpeg" alt="Jumeirah Bay Island Villa — Golden Hour" loading="lazy" />
+          <div class="property-status">Off-Market</div>
+        </div>
+        <div class="property-info">
+          <div class="property-meta">
+            <span class="property-location">Jumeirah Bay Island</span>
+            <span class="property-type">Waterfront Villa</span>
+          </div>
+          <h3 class="property-name">Bay Island Compound</h3>
+          <div class="property-footer">
+            <span class="property-price">AED 210,000,000</span>
+            <span class="property-detail">10 BR &nbsp;·&nbsp; 32,000 sq ft &nbsp;·&nbsp; Private Jetty</span>
+          </div>
+          <a class="property-enquire" href="#contact">Request Information</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Editorial Feature -->
+  <section class="editorial-section reveal-item">
+    <div class="editorial-image">
+      <img src="images/Palm Villa Golden Hour.jpg" alt="Featured Palm Jumeirah Villa" loading="lazy" />
+    </div>
+    <div class="editorial-content">
+      <span class="section-label-static">004 &nbsp;/&nbsp; Featured</span>
+      <h2 class="editorial-heading">The Pinnacle of<br><em>Palm Living</em></h2>
+      <p class="editorial-body">A landmark compound on the outermost tip of Frond K — the only position on the Palm with an unobstructed 270-degree view of the Arabian Gulf. Designed by a Pritzker-shortlisted studio. Never previously offered to the open market.</p>
+      <div class="editorial-details">
+        <div class="editorial-detail"><span class="detail-label">Size</span><span class="detail-value">28,500 sq ft</span></div>
+        <div class="editorial-detail"><span class="detail-label">Bedrooms</span><span class="detail-value">8 + 2 Staff</span></div>
+        <div class="editorial-detail"><span class="detail-label">Waterfront</span><span class="detail-value">94 linear metres</span></div>
+        <div class="editorial-detail"><span class="detail-label">Guide Price</span><span class="detail-value">AED 340M</span></div>
+      </div>
+      <a class="editorial-cta" href="#contact">Request Information</a>
+    </div>
+  </section>
+
+  <!-- Philosophy Pull Quote -->
+  <section class="philosophy-section reveal-item">
+    <div class="philosophy-inner">
+      <span class="section-label-static">On Acquisition</span>
+      <blockquote class="philosophy-quote">
+        "We do not find properties.<br>We find futures."
+      </blockquote>
+      <div class="philosophy-values">
+        <span>Discretion</span>
+        <span class="divider">|</span>
+        <span>Access</span>
+        <span class="divider">|</span>
+        <span>Result</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Strip 2 -->
+  <div class="marquee-static-wrap">
+    <div class="marquee-static-inner">
+      <div class="marquee-static-text">
+        AED 9.2B TRANSACTED &nbsp;·&nbsp; OFF-MARKET ACCESS &nbsp;·&nbsp; PRIVATE ACQUISITION &nbsp;·&nbsp; WATERFRONT COMPOUNDS &nbsp;·&nbsp; RECORD TRANSACTIONS &nbsp;·&nbsp; DISCREET REPRESENTATION &nbsp;·&nbsp;
+        AED 9.2B TRANSACTED &nbsp;·&nbsp; OFF-MARKET ACCESS &nbsp;·&nbsp; PRIVATE ACQUISITION &nbsp;·&nbsp; WATERFRONT COMPOUNDS &nbsp;·&nbsp; RECORD TRANSACTIONS &nbsp;·&nbsp; DISCREET REPRESENTATION &nbsp;·&nbsp;
+      </div>
+    </div>
+  </div>
+
+  <!-- Begin Privately -->
+  <section class="cta-bottom" id="contact">
+    <span class="section-label-static">Connect</span>
+    <h2 class="cta-heading">Begin privately.</h2>
+    <p class="cta-body">Initial conversations are confidential. No portal registrations, no automated follow-up. A direct line to a senior advisor.</p>
+    <form class="cta-form" onsubmit="return false;">
+      <input class="cta-input" type="email" placeholder="Your email address" autocomplete="email" />
+      <button class="cta-button" type="submit">Request a private briefing</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">MAHARI</span>
+        <p class="footer-tagline">Private acquisition. Discreet representation.<br>Dubai's absolute prime.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-title">Company</span>
+          <a href="#">About Mahari</a>
+          <a href="#">Our Approach</a>
+          <a href="#">Advisory Team</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Markets</span>
+          <a href="#">Palm Jumeirah</a>
+          <a href="#">Emirates Hills</a>
+          <a href="#">Jumeirah Bay</a>
+          <a href="#">DIFC</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-title">Contact</span>
+          <a href="mailto:enquiries@mahari.ae">enquiries@mahari.ae</a>
+          <a href="tel:+97144000000">+971 4 400 0000</a>
+          <a href="#">Dubai International Financial Centre</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Mahari Real Estate LLC. Licensed by Dubai Land Department. RERA Permit No. 12345.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /post-scroll-wrap -->
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
