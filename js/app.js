@@ -284,7 +284,7 @@
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1,
+        scrub: true,
         onEnter:     function () { video.style.opacity = "1"; },
         onEnterBack: function () { video.style.opacity = "1"; },
         onLeaveBack: function () { video.style.opacity = "0"; },
