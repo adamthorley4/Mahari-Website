@@ -271,51 +271,90 @@
     document.querySelectorAll(".reveal-item").forEach(function (el) { observer.observe(el); });
   }
 
-  // ─── Pool fly-over video (fixed, scroll-scrubbed) ───────────────
+  // ─── Pool fly-over canvas frame scrubbing ────────────────────────
   function initPoolVideo() {
-    const video   = document.getElementById("pool-video");
-    const section = document.getElementById("pool-video-section");
-    if (!video || !section) return;
+    const poolCanvas  = document.getElementById("pool-canvas");
+    const section     = document.getElementById("pool-video-section");
+    if (!poolCanvas || !section) return;
 
-    function setupScrubbing() {
+    const POOL_DIR   = "frames-pool/";
+    const POOL_EXT   = ".jpg";
+    const poolCtx    = poolCanvas.getContext("2d");
+    let poolFrames   = [];
+    let poolCount    = 0;
+    let poolCurrent  = 0;
+
+    function resizePoolCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      poolCanvas.width  = window.innerWidth  * dpr;
+      poolCanvas.height = window.innerHeight * dpr;
+      poolCanvas.style.width  = window.innerWidth  + "px";
+      poolCanvas.style.height = window.innerHeight + "px";
+      poolCtx.setTransform(1, 0, 0, 1, 0, 0);
+      poolCtx.scale(dpr, dpr);
+      if (poolFrames[poolCurrent]) drawPoolFrame(poolCurrent);
+    }
+    window.addEventListener("resize", resizePoolCanvas);
+    resizePoolCanvas();
+
+    function drawPoolFrame(index) {
+      const img = poolFrames[index];
+      if (!img) return;
+      const cw = window.innerWidth, ch = window.innerHeight;
+      const iw = img.naturalWidth,  ih = img.naturalHeight;
+      const scale = Math.max(cw / iw, ch / ih);
+      poolCtx.drawImage(img, (cw - iw * scale) / 2, (ch - ih * scale) / 2, iw * scale, ih * scale);
+    }
+
+    function setupPoolScrubbing() {
       ScrollTrigger.create({
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: true,
-        onEnter:     function () { video.style.opacity = "1"; },
-        onEnterBack: function () { video.style.opacity = "1"; },
-        onLeaveBack: function () { video.style.opacity = "0"; },
-        // No onLeave fade — post-scroll-wrap (z-index 20) scrolls over the video naturally,
-        // keeping the last frame visible without a jump back to the canvas.
+        onEnter:     function () { poolCanvas.style.opacity = "1"; },
+        onEnterBack: function () { poolCanvas.style.opacity = "1"; },
+        onLeaveBack: function () { poolCanvas.style.opacity = "0"; },
+        // No onLeave — post-scroll-wrap (z-index 20) covers naturally
         onUpdate: function (self) {
-          if (video.duration) {
-            video.currentTime = self.progress * video.duration;
+          const idx = Math.min(Math.round(self.progress * (poolCount - 1)), poolCount - 1);
+          if (idx !== poolCurrent) {
+            poolCurrent = idx;
+            drawPoolFrame(idx);
           }
         }
       });
     }
 
-    // Fetch the full video into memory as a blob so every currentTime seek is
-    // instant (no network round-trip per frame). Falls back to streaming if fetch fails.
-    fetch("images/Pool%20Flyover.mp4")
-      .then(function (res) { return res.blob(); })
-      .then(function (blob) {
-        video.src = URL.createObjectURL(blob);
-        if (video.readyState >= 2) {
-          setupScrubbing();
-        } else {
-          video.addEventListener("canplay", setupScrubbing, { once: true });
-        }
-      })
-      .catch(function () {
-        video.load();
-        if (video.readyState >= 2) {
-          setupScrubbing();
-        } else {
-          video.addEventListener("canplay", setupScrubbing, { once: true });
-        }
-      });
+    // Detect total frame count then load all frames
+    function detectPoolFrameCount(cb) {
+      let n = 1;
+      function tryNext() {
+        const img = new Image();
+        img.onload  = function () { n++; tryNext(); };
+        img.onerror = function () { cb(n - 1); };
+        img.src = POOL_DIR + "frame_" + pad(n, 4) + POOL_EXT;
+      }
+      tryNext();
+    }
+
+    detectPoolFrameCount(function (total) {
+      if (total < 2) return;
+      poolCount  = total;
+      poolFrames = new Array(total).fill(null);
+      let loaded = 0;
+      for (let i = 0; i < total; i++) {
+        (function (idx) {
+          const img = new Image();
+          img.onload = function () {
+            poolFrames[idx] = img;
+            loaded++;
+            if (loaded === 1 && idx === 0) drawPoolFrame(0);
+            if (loaded === total) setupPoolScrubbing();
+          };
+          img.src = POOL_DIR + "frame_" + pad(idx + 1, 4) + POOL_EXT;
+        }(i));
+      }
+    });
   }
 
   // ─── Editorial image pan (horizontal drag to explore wide image) ──
