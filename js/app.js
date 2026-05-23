@@ -273,16 +273,17 @@
 
   // ─── Pool fly-over canvas frame scrubbing ────────────────────────
   function initPoolVideo() {
-    const poolCanvas  = document.getElementById("pool-canvas");
-    const section     = document.getElementById("pool-video-section");
+    const poolCanvas = document.getElementById("pool-canvas");
+    const section    = document.getElementById("pool-video-section");
     if (!poolCanvas || !section) return;
 
+    const POOL_TOTAL = 101;
     const POOL_DIR   = "frames-pool/";
     const POOL_EXT   = ".jpg";
     const poolCtx    = poolCanvas.getContext("2d");
-    let poolFrames   = [];
-    let poolCount    = 0;
-    let poolCurrent  = 0;
+    const poolFrames = new Array(POOL_TOTAL).fill(null);
+    let   poolCurrent = 0;
+    let   scrubReady  = false;
 
     function resizePoolCanvas() {
       const dpr = window.devicePixelRatio || 1;
@@ -307,6 +308,8 @@
     }
 
     function setupPoolScrubbing() {
+      if (scrubReady) return;
+      scrubReady = true;
       ScrollTrigger.create({
         trigger: section,
         start: "top top",
@@ -316,45 +319,30 @@
         onLeaveBack: function () { poolCanvas.style.opacity = "0"; },
         // No onLeave — post-scroll-wrap (z-index 20) covers naturally
         onUpdate: function (self) {
-          const idx = Math.min(Math.round(self.progress * (poolCount - 1)), poolCount - 1);
+          const idx = Math.min(Math.round(self.progress * (POOL_TOTAL - 1)), POOL_TOTAL - 1);
           if (idx !== poolCurrent) {
             poolCurrent = idx;
             drawPoolFrame(idx);
           }
         }
       });
+      ScrollTrigger.refresh();
     }
 
-    // Detect total frame count then load all frames
-    function detectPoolFrameCount(cb) {
-      let n = 1;
-      function tryNext() {
-        const img = new Image();
-        img.onload  = function () { n++; tryNext(); };
-        img.onerror = function () { cb(n - 1); };
-        img.src = POOL_DIR + "frame_" + pad(n, 4) + POOL_EXT;
-      }
-      tryNext();
+    // Load all frames in parallel; set up scrubbing as soon as frame 0 is ready
+    for (var i = 0; i < POOL_TOTAL; i++) {
+      (function (idx) {
+        var img = new Image();
+        img.onload = function () {
+          poolFrames[idx] = img;
+          if (idx === 0) {
+            drawPoolFrame(0);
+            setupPoolScrubbing();
+          }
+        };
+        img.src = POOL_DIR + "frame_" + pad(idx + 1, 4) + POOL_EXT;
+      }(i));
     }
-
-    detectPoolFrameCount(function (total) {
-      if (total < 2) return;
-      poolCount  = total;
-      poolFrames = new Array(total).fill(null);
-      let loaded = 0;
-      for (let i = 0; i < total; i++) {
-        (function (idx) {
-          const img = new Image();
-          img.onload = function () {
-            poolFrames[idx] = img;
-            loaded++;
-            if (loaded === 1 && idx === 0) drawPoolFrame(0);
-            if (loaded === total) setupPoolScrubbing();
-          };
-          img.src = POOL_DIR + "frame_" + pad(idx + 1, 4) + POOL_EXT;
-        }(i));
-      }
-    });
   }
 
   // ─── Editorial image pan (horizontal drag to explore wide image) ──
