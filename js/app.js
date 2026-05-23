@@ -277,8 +277,6 @@
     const section = document.getElementById("pool-video-section");
     if (!video || !section) return;
 
-    video.load();
-
     function setupScrubbing() {
       ScrollTrigger.create({
         trigger: section,
@@ -298,11 +296,26 @@
       });
     }
 
-    if (video.readyState >= 2) {
-      setupScrubbing();
-    } else {
-      video.addEventListener("canplay", setupScrubbing, { once: true });
-    }
+    // Fetch the full video into memory as a blob so every currentTime seek is
+    // instant (no network round-trip per frame). Falls back to streaming if fetch fails.
+    fetch("images/Pool%20Flyover.mp4")
+      .then(function (res) { return res.blob(); })
+      .then(function (blob) {
+        video.src = URL.createObjectURL(blob);
+        if (video.readyState >= 2) {
+          setupScrubbing();
+        } else {
+          video.addEventListener("canplay", setupScrubbing, { once: true });
+        }
+      })
+      .catch(function () {
+        video.load();
+        if (video.readyState >= 2) {
+          setupScrubbing();
+        } else {
+          video.addEventListener("canplay", setupScrubbing, { once: true });
+        }
+      });
   }
 
   // ─── Editorial image pan (horizontal drag to explore wide image) ──
