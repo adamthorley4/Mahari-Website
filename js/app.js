@@ -304,6 +304,8 @@
       const cw = window.innerWidth, ch = window.innerHeight;
       const iw = img.naturalWidth,  ih = img.naturalHeight;
       const scale = Math.max(cw / iw, ch / ih);
+      poolCtx.imageSmoothingEnabled  = true;
+      poolCtx.imageSmoothingQuality  = "high";
       poolCtx.drawImage(img, (cw - iw * scale) / 2, (ch - ih * scale) / 2, iw * scale, ih * scale);
     }
 
